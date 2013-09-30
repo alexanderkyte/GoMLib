@@ -6,7 +6,7 @@ import (
         //"DecisionTrees"
         //"FP-Growth"
         //"KMeansCluster"
-        //"KNearestNeighbors"
+        "KNearestNeighbors"
         //"NaiveBayes"
         //"Regression"
         //"SupportVectorMachine"
