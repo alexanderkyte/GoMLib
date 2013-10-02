@@ -2,17 +2,18 @@ package KNearestNeighbors
 
 import (
 	"math"
+	"sort"
 )
 
 type KComparable interface {
 	YieldComparing() []float64
-	YieldLabel() String
+	YieldLabel() string
 }
 
 // xs must be at least 2 items
 func getLabel(x KComparable, xs []KComparable) KComparable {
 	distanceToLabel := make(map[float64]string)
-	distances := new([len(xs)]float64)
+	distances := make([]float64, len(xs))
 	xFields := x.YieldComparing()
 
 	for i := 0; i < len(xs); i++ {
@@ -28,13 +29,13 @@ func getLabel(x KComparable, xs []KComparable) KComparable {
 		distanceToLabel[distance] = xs[i].YieldLabel()
 	}
 
-	sort.Sort(distances)
+	sort.Float64Slice(distances).Sort()
 
 	var max float64
 	var labelGuess string
 
 	{
-		labelCount = make(map[string]float)
+		labelCount := make(map[string]float64)
 		step := (distances[1] - distances[0])
 		i := 0
 		last := distances[0]
