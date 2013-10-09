@@ -1,4 +1,4 @@
-package KNearestNeighbors
+package GoMLib
 
 import (
 	"sort"
