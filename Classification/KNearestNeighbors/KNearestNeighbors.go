@@ -1,34 +1,11 @@
 package KNearestNeighbors
 
 import (
-	"math"
 	"sort"
 )
 
-type KComparable interface {
-	YieldComparing() []float64
-	YieldLabel() string
-}
-
 // xs must be at least 2 items
-func getLabel(x KComparable, xs []KComparable) string {
-	distanceToLabel := make(map[float64]string)
-	distances := make([]float64, len(xs))
-
-	xFields := x.YieldComparing()
-
-	for i := 0; i < len(xs); i++ {
-		distance := float64(0)
-		xthFields := xs[i].YieldComparing()
-
-		for j := 0; j < len(xFields); j++ {
-			distance += math.Pow((xFields[j] - xthFields[j]), 2)
-		}
-
-		distance = math.Sqrt(distance)
-		distances[i] = distance
-		distanceToLabel[distance] = xs[i].YieldLabel()
-	}
+func getLabel(distances []float64, distanceToLabel map[float64]string) string {
 
 	sort.Float64Slice(distances).Sort()
 
